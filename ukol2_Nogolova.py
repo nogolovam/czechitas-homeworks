@@ -1,7 +1,7 @@
 import requests
 import json
 
-# Část 1 – hledání podle IČO
+# Část 1 – IČO
 def search_by_ico():
     ico = input("Zadejte IČO subjektu: ").strip()
     url = f"https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/{ico}"
@@ -21,7 +21,7 @@ def find_legal_form(kod, polozky):
                     return zaznam.get("nazev", "Neznámá forma")
     return "Neznámá forma"
 
-# Načtení číselníku právních forem
+# Načtení číselníku
 def get_legal_forms():
     url = "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ciselniky-nazevniky/vyhledat"
     headers = {
@@ -34,7 +34,7 @@ def get_legal_forms():
     ciselnik = json_data.get("ciselniky", [{}])[0]
     return ciselnik.get("polozkyCiselniku", [])
 
-# Část 2 – hledání podle názvu subjektu
+# Část 2 – hledání podle názvu
 def search_by_name():
     polozky_ciselniku = get_legal_forms()
     nazev = input("Zadejte název subjektu pro vyhledání: ").strip()
